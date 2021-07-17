@@ -31,7 +31,7 @@ class IndexView(LoginRequiredMixin, ListView):
         if reports.count() > 0:
           ctx['new_report_id'] = StudentReport.objects.filter(student=self.request.user).last().pk + 1
         else:
-          ctx['new_report_id'] = 0
+          ctx['new_report_id'] = 1
         return ctx
 
 class ExamDetailView(PermissionRequiredMixin, DetailView):
