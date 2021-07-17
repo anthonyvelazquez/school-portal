@@ -25,7 +25,9 @@ SECRET_KEY = '^b1nmsyf8$jnmv!550zbf!t34koqkbjou&pm*gfdc(k0d3y!p9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://av-test-portal.herokuapp.com/',
+'localhost',
+'127.0.0.1']
 
 
 # Application definition
