@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="card mt-5">
+    <div class="card-header">
+      <h5 class="card-title">Currently taking Exam #{{exam.id}}</h5>
+    </div>
+    <div class="card-body">
+      <dl class="row">
+        <dt class="col-sm-3">Title</dt>
+        <dd class="col-sm-9">{{ exam.title }}</dd>
+        <dt class="col-sm-3">Created By</dt>
+        <dd class="col-sm-9">{{ exam.teacher.username }}</dd>
+      </dl>
+
+    </div>
+  </div>
+  <div class="card mt-5">
+    <div class="card-header">
+      <h5 class="card-title">Question {{ques_num}}</h5>
+    </div>
+    <div class="card-body">
+      <form action="{% url 'exam-take' report_id exam.id ques_num %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="prompt">Prompt ({{prompt_tokens}} Tokens)</label>
+          <input type="text" class="form-control" id="prompt" value="{{question.prompt}}" readonly>
+        </div>
+        <div class="form-group">
+          <label for="answer">Response</label>
+          <input type="text" class="form-control" id="answer" name="answer" placeholder="Write answer here">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
