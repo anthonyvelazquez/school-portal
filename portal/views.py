@@ -27,7 +27,8 @@ class IndexView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super(IndexView, self).get_context_data(**kwargs)
-        if not self.request.user.is_staff:
+        reports = StudentReport.objects.filter(student=self.request.user)
+          if reports.count() > 0:
             ctx['new_report_id'] = StudentReport.objects.filter(student=self.request.user).last().pk + 1
         return ctx
 
