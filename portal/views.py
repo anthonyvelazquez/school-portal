@@ -70,7 +70,7 @@ class TakeExamView(LoginRequiredMixin, View):
             raise Http404("Cannot navigate between questions. Exam is finalized")
         exam = Exam.objects.get(pk=pk)
         question = exam.questions.all()[ques_num-1]
-        prompt_tokens = word_tokenize(question.prompt)
+        prompt_tokens = len(TextBlob(question.prompt).words)
         report = StudentReport.objects.get_or_create(pk=report_id, student=request.user, exam=exam)
         return render(request, 'portal/take.html', {'exam': exam, 'question': question, 'ques_num': ques_num, 'report_id': report_id, 'prompt_tokens': prompt_tokens})
 
