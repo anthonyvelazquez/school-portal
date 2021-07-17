@@ -13,9 +13,7 @@ from django.urls import reverse_lazy
 
 from .models import Exam, Question, StudentReport
 
-from nltk.tokenize import word_tokenize
-import nltk
-
+from textblob import TextBlob
 
 def get_referer(request):
     referer = request.META.get('HTTP_REFERER')
@@ -83,7 +81,6 @@ class TakeExamView(LoginRequiredMixin, View):
         if question.answer == answer:
             report.correct_answers += 1
         ques_num += 1
-        report.score = (report.correct_answers / exam.questions.count()) * 100
         report.save()
         if ques_num > exam.questions.count():
             return redirect('report')

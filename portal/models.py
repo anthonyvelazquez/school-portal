@@ -21,3 +21,7 @@ class StudentReport(models.Model):
   correct_answers = models.IntegerField(default=0)
   exam = models.ForeignKey(Exam, on_delete=models.CASCADE, related_name='exam')
   student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student')
+  
+  def save(self, *args, **kwargs):
+        self.score = (self.correct_answers / self.exam.questions.count()) * 100
+        super(StudentReport, self).save(*args, **kwargs)
