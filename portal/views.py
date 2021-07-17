@@ -80,7 +80,7 @@ class TakeExamView(LoginRequiredMixin, View):
         exam = Exam.objects.get(pk=pk)
         question = exam.questions.all()[ques_num-1]
         answer = request.POST.get('answer', '')
-        report, created = StudentReport.objects.get_or_create(pk=report_id, student=request.user)
+        report, created = StudentReport.objects.get_or_create(pk=report_id, student=request.user, exam=exam)
         if question.answer == answer:
             report.correct_answers += 1
         ques_num += 1
