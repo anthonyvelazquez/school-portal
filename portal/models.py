@@ -13,7 +13,7 @@ class Exam(models.Model):
   updated_at = models.DateTimeField(auto_now=True)
 
   title = models.CharField(max_length=255)
-  questions = models.ManyToManyField(Question, related_name='questions', blank=True, null=True)
+  questions = models.ManyToManyField(Question, related_name='questions')
   teacher = models.ForeignKey(User, on_delete=models.CASCADE, related_name='teacher')
 
 class StudentReport(models.Model):
